@@ -30,7 +30,8 @@ def traverseTrie(head, node, visited=[]):
 	found = []
 	
 	if head[node.getValue()]:
-		print head.getLetter()
+		current_letter = head.getLetter()
+
 		if head.isWordEnd():
 			found.append(head.getLetter())
 
@@ -39,24 +40,45 @@ def traverseTrie(head, node, visited=[]):
 
 		endings = []
 		for neighbor in node.getNeighbors():
-			endings.extend(traverseTrie(head, neighbor, visited))
+			if neighbor not in visited:
+				endings.extend(traverseTrie(head, neighbor, visited))
 
-		print "ENDINGS"
-		print endings
 		result = [current_letter + ending for ending in endings]
 		found.extend(result)
 
 	return found
 
+def findWords(head, node, visited=[]):
+	if head:
+		visited.append(node)
+		results = []
+		for neighbor in node.getNeighbors():
+			if head[neighbor.getValue()]:
+				endings = findWords(head[neighbor.getValue()], neighbor, visited)
+				results.extend([head.getLetter() + ending for ending in endings])
 
-RUZZLE_PUZZLE = "ZXABWCETVRJZZXQU".lower()
+		if head.isWordEnd():
+			results.append(head.getLetter())
+
+		return results
+
+	return []
+
+RUZZLE_PUZZLE = "APSNERDASWNEHORC".lower()
 board = [Node(letter) for letter in RUZZLE_PUZZLE]
 createConnections(board, RUZZLE_PUZZLE)
-trie = createTrie('test_dict.txt')
+trie = createTrie('ruzzle_dictionary.txt')
 
+results = []
 for node in board:
 	head = trie
-	print "NODE: %s" % node.getValue()
-	found_words = traverseTrie(head, node)
+	found_words = []
+	if head[node.getValue()]:
+		found_words = findWords(head, node)
 
-	print found_words
+	if len(found_words) > 0:
+		results.extend(found_words)
+
+print len(found_words)
+found_words.sort()
+print found_words
