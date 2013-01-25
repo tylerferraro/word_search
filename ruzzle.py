@@ -31,7 +31,7 @@ def findWords(head, node, visited=[]):
 		visited.append(node)
 		results = []
 		for neighbor in node.getNeighbors():
-			if head[neighbor.getValue()]:
+			if neighbor not in visited and head[neighbor.getValue()]:
 				endings = findWords(head[neighbor.getValue()], neighbor, visited)
 				results.extend([head.getLetter() + ending for ending in endings])
 
@@ -42,6 +42,25 @@ def findWords(head, node, visited=[]):
 
 	return []
 
+def algorithm(head, node, visited=[]):
+	found = []
+	
+	if not head:
+		return found
+
+	if head.isWordEnd():
+		found.append(head.getLetter())
+
+	visited.append(node)
+
+	for neighbor in node.getNeighbors():
+		if neighbor not in visited:
+			results = algorithm(head[neighbor.getValue()], neighbor, visited)
+			found.extend([head.getLetter() + ending for ending in results])
+
+	visited.remove(node)
+	return found
+
 RUZZLE_PUZZLE = "APSNERDASWNEHORC".lower()
 board = [Node(letter) for letter in RUZZLE_PUZZLE]
 createConnections(board, RUZZLE_PUZZLE)
@@ -51,7 +70,7 @@ results = []
 for node in board:
 	head = trie
 	if head[node.getValue()]:
-		found_words = findWords(head[node.getValue()], node)
+		found_words = algorithm(head[node.getValue()], node)
 
 		if len(found_words) > 0:
 			results.extend(found_words)
@@ -60,4 +79,3 @@ results = list(set(results))
 results.sort()
 
 print len(results)
-print results

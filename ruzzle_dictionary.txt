@@ -28625,7 +28625,6 @@ dozily
 doziness
 dozing
 dozy
-dp
 drab
 drabbed
 drabber
@@ -29296,7 +29295,7 @@ dumdums
 dumfound
 dumfounded
 dumfounding
-dumfounds
+dumfoun`
 dummied
 dummies
 dummkopf
