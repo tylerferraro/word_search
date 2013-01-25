@@ -50,13 +50,14 @@ trie = createTrie('ruzzle_dictionary.txt')
 results = []
 for node in board:
 	head = trie
-	found_words = []
 	if head[node.getValue()]:
-		found_words = findWords(head, node)
+		found_words = findWords(head[node.getValue()], node)
 
-	if len(found_words) > 0:
-		results.extend(found_words)
+		if len(found_words) > 0:
+			results.extend(found_words)
 
-print len(found_words)
-found_words.sort()
-print found_words
+results = list(set(results))
+results.sort()
+
+print len(results)
+print results
