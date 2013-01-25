@@ -2,16 +2,16 @@ class Trie:
 	def __init__(self, letter=""):
 		self.branches = {}
 		self.letter = letter
-		self.end_word = False
+		self.is_word_end = False
 
 	def __getitem__(self, letter):
 		return self.branches.get(letter, None)
 
-	def isWordEnd():
+	def isWordEnd(self):
 		return self.is_word_end
 
 	def setWordEnd(self, value=True):
-		self.word_end = value
+		self.is_word_end = value
 
 	def getLetter(self):
 		return self.letter
@@ -19,10 +19,8 @@ class Trie:
 	def addBranch(self, branch):
 		self.branches[branch.getLetter()] = branch
 
-	def printTrie(self, tab_level=0):
-		print "\t" * tab_level + self.letter
-		for v in self.branches.values():
-			v.printTrie(tab_level+1)
+	def printTrie(self):
+		print self.branches
 
 class Node:
 	def __init__(self, letter):
@@ -71,8 +69,43 @@ def createConnections(board, puzzle_str):
 				neighbor = board[n]
 				node.addNeighbor(neighbor)
 
-RUZZLE_PUZZLE = "ABCDEFGHIJKLMNOP"
+def traverseTrie(head, node, visited=[]):
+	found = []
+	
+	if head[node.getValue()]:
+		print head.getLetter()
+		if head.isWordEnd():
+			found.append(head.getLetter())
+
+		visited.append(head)
+		head = head[node.getValue()]
+
+		endings = []
+		for neighbor in node.getNeighbors():
+			endings.extend(traverseTrie(head, neighbor, visited))
+
+		print "ENDINGS"
+		print endings
+		result = [current_letter + ending for ending in endings]
+		found.extend(result)
+
+	return found
+
+
+
+RUZZLE_PUZZLE = "ZXABWCETVRJZZXQU".lower()
 board = [Node(letter) for letter in RUZZLE_PUZZLE]
 createConnections(board, RUZZLE_PUZZLE)
 trie = createTrie('test_dict.txt')
-trie.printTrie()
+
+for node in board:
+	head = trie
+	print "NODE: %s" % node.getValue()
+	found_words = traverseTrie(head, node)
+
+	print found_words
+
+
+
+
+

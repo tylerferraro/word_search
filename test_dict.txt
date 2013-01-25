@@ -1,5 +1,4 @@
 ab
-abs
-bad
 cat
-cast
+cater
+dog
