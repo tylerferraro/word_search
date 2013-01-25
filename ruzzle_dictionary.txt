@@ -31900,6 +31900,7 @@ enwheeling
 enwinding
 enwombing
 enwrap
+enwraps
 enwrapped
 enwrapping
 enzymatic
@@ -73037,6 +73038,8 @@ presetting
 preshape
 preshaped
 preshapes
+preshow
+preshown
 preshrunk
 preside
 presided
@@ -73238,6 +73241,7 @@ prewash
 prewashed
 prewashes
 prewashing
+preworn
 prexies
 prexy
 prey
@@ -77832,6 +77836,7 @@ redfin
 redhead
 redheaded
 redheads
+redictate
 redid
 redigest
 redigested
@@ -80082,6 +80087,7 @@ reships
 reshooting
 reshowed
 reshowing
+reshown
 reshuffle
 reshuffled
 reshuffles

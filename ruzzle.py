@@ -61,7 +61,7 @@ def algorithm(head, node, visited=[]):
 	visited.remove(node)
 	return found
 
-RUZZLE_PUZZLE = "APSNERDASWNEHORC".lower()
+RUZZLE_PUZZLE = "RETTDAAKEISTRECN".lower()
 board = [Node(letter) for letter in RUZZLE_PUZZLE]
 createConnections(board, RUZZLE_PUZZLE)
 trie = createTrie('ruzzle_dictionary.txt')
@@ -76,6 +76,7 @@ for node in board:
 			results.extend(found_words)
 
 results = list(set(results))
-results.sort()
+output = sorted(results, key=lambda word: [len(word)], reverse=True)
 
 print len(results)
+print output
