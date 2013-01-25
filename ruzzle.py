@@ -26,28 +26,6 @@ def createConnections(board, puzzle_str):
 				neighbor = board[n]
 				node.addNeighbor(neighbor)
 
-def traverseTrie(head, node, visited=[]):
-	found = []
-	
-	if head[node.getValue()]:
-		current_letter = head.getLetter()
-
-		if head.isWordEnd():
-			found.append(head.getLetter())
-
-		visited.append(head)
-		head = head[node.getValue()]
-
-		endings = []
-		for neighbor in node.getNeighbors():
-			if neighbor not in visited:
-				endings.extend(traverseTrie(head, neighbor, visited))
-
-		result = [current_letter + ending for ending in endings]
-		found.extend(result)
-
-	return found
-
 def findWords(head, node, visited=[]):
 	if head:
 		visited.append(node)
