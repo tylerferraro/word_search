@@ -26,22 +26,6 @@ def createConnections(board, puzzle_str):
 				neighbor = board[n]
 				node.addNeighbor(neighbor)
 
-def findWords(head, node, visited=[]):
-	if head:
-		visited.append(node)
-		results = []
-		for neighbor in node.getNeighbors():
-			if neighbor not in visited and head[neighbor.getValue()]:
-				endings = findWords(head[neighbor.getValue()], neighbor, visited)
-				results.extend([head.getLetter() + ending for ending in endings])
-
-		if head.isWordEnd():
-			results.append(head.getLetter())
-
-		return results
-
-	return []
-
 def algorithm(head, node, visited=[]):
 	found = []
 	
@@ -61,7 +45,7 @@ def algorithm(head, node, visited=[]):
 	visited.remove(node)
 	return found
 
-RUZZLE_PUZZLE = "RETTDAAKEISTRECN".lower()
+RUZZLE_PUZZLE = "TIMILNEDEAOMTCAR".lower()
 board = [Node(letter) for letter in RUZZLE_PUZZLE]
 createConnections(board, RUZZLE_PUZZLE)
 trie = createTrie('ruzzle_dictionary.txt')
