@@ -1,3 +1,10 @@
+#######################################
+# Trie Class                          #
+#                                     #
+# Developer: Tyler Ferraro            #
+#            tyler.ferraro@gmail.com  #
+#######################################
+
 class Trie:
 	def __init__(self, letter=""):
 		self.branches = {}
