@@ -1,3 +1,14 @@
+#######################################
+# Ruzzle Solver                       #
+#                                     #
+# Use: For finding the largest words  #
+#   and almost all words in the       #
+#   Ruzzle puzzle game.               #
+#                                     #
+# Developer: Tyler Ferraro            #
+#            tyler.ferraro@gmail.com  #
+#######################################
+
 require './lib/trie'
 require './lib/node'
 
@@ -43,7 +54,7 @@ class Ruzzle
   end
 
   # Iterate over the nodes on the boards checking
-  # for all solutions starting at that point
+  # for all solutions starting at the trie head
   def solve
     found_words = Array.new
     @board.each do |node|
@@ -55,11 +66,9 @@ class Ruzzle
     found_words.uniq.sort_by { |x| [-x.length, x] }
   end
 
-  # Starts at a passed in head node, if the
-  # node is None then returns what it's found
-  # Otherwise it checks if this is the end of
-  # a word and adds it to words. Then checks
-  # each neighbor node in turn.
+  # Traverse the trie from the given head
+  # and recursively walk it return all node
+  # values that match trie
   def process_trie head, node, visited=[]
     return [] unless head
 
