@@ -5,12 +5,12 @@
 class Node
   attr_reader :value, :neighbors
 
-  def initialize value
+  def initialize(value)
     @value = value
-    @neighbors = Array.new
+    @neighbors = []
   end
 
-  def add_neighbor neighbor
+  def add_neighbor(neighbor)
     @neighbors << neighbor
   end
 end

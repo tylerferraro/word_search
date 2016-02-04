@@ -6,13 +6,13 @@
 class Trie
 	attr_reader :is_word_end, :value
 
-	def initialize value=""
-		@branches = Hash.new
+	def initialize(value="")
+		@branches = { }
 		@value = value
 		@is_word_end = false
 	end
 
-	def [] value
+	def [](value)
 		@branches[value]
 	end
 
@@ -20,11 +20,11 @@ class Trie
 		@is_word_end
 	end
 
-	def set_word_end value=true
+	def set_word_end(value=true)
 		@is_word_end = value
 	end
 
-	def add_branch branch
+	def add_branch(branch)
 		@branches[branch.value] = branch
 	end
 
